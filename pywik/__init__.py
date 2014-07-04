@@ -13,7 +13,8 @@ class Pywik(object):
         self.session.params['token_auth'] = token_auth
         self.session.params['format'] = 'json'
 
-    def get_user_manager(self):
+    @property
+    def user_manager(self):
         return UserManager(self.session, self.api_url)
 
 
@@ -30,15 +31,13 @@ class UserManager(object):
         self.url = url
 
     def add_user(self, user_login, password, email, alias=''):
-        response = self.session.get(self.url, params={
+        return _check_error(self.session.get(self.url, params={
             'method': 'UsersManager.addUser',
             'userLogin': user_login,
             'password': password,
             'email': email,
             'alias': alias
-        })
-
-        return _check_error(response)
+        }))
 
     def delete_user(self, user_login):
         return _check_error(self.session.get(self.url, params={

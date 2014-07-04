@@ -1,7 +1,10 @@
+import logging
 import os
 import uuid
 
 from pywik import Pywik
+
+log = logging.getLogger(__name__)
 
 
 class BaseTest(object):
@@ -15,13 +18,14 @@ class BaseTest(object):
 class TestUsersManager(BaseTest):
     @classmethod
     def setup(cls):
-        cls.manager = cls.c.get_user_manager()
+        cls.manager = cls.c.user_manager
         cls.user_login = 'testuser-{}'.format(cls.random_string())
-        print cls.manager.add_user(cls.user_login, 'password', '{}@example.com'.format(cls.user_login))
+        log.debug(cls.manager.add_user(cls.user_login, 'password', '{}@example.com'.format(cls.user_login)))
 
     @classmethod
     def teardown_class(cls):
-        print cls.manager.delete_user(cls.user_login)
+        log.debug(cls.manager.delete_user(cls.user_login))
 
     def test_empty(self):
+        # Need an empty tst to force setup/teardown to run once.
         pass
