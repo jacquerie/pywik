@@ -1,9 +1,12 @@
 import os
+import logging
 import uuid
 
 import pytest
 
 from pywik import Pywik
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def random_string():
@@ -26,7 +29,7 @@ def user(client):
 @pytest.yield_fixture(scope='session')
 def site(client):
     site_name = 'testsite-{}'.format(random_string())
-    site_id = client.sites_manager.add_site(site_name, ['http://example.com'])
+    site_id = client.sites_manager.add_site(site_name, ['http://example.com', 'http://blah.com'])
     yield site_id
     print client.sites_manager.delete_site(site_id)
 
@@ -34,7 +37,7 @@ def site(client):
 class TestUsersManager(object):
     def test_set_access(self, client, user, site):
         # Need an empty test to force setup/teardown to run once.
-        print client.users_manager.set_user_access(user, 'view', site)
+        print client.users_manager.set_user_access(user, 'view', [site])
 
 
 class TestSitesManager(object):
