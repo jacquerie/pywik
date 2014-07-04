@@ -60,7 +60,7 @@ class UsersManagaer(Base):
             'userLogin': user_login,
             'access': access,
             'idSites': site_ids
-            }))
+        }))
 
 
 class SitesManager(Base):
@@ -98,5 +98,3 @@ class SitesManager(Base):
             'method': 'SitesManager.deleteSite',
             'idSite': site_id
         }))
-
-
