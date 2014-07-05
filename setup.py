@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='pywik',
       version='0.1',
@@ -7,4 +7,5 @@ setup(name='pywik',
       author_email='jay.r.camp@gmail.com',
       url='http://github.com/jrcamp/pywik',
       packages=['pywik'],
+      install_requires=['requests>=2.3.0'],
  )
