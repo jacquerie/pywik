@@ -98,7 +98,6 @@ class SitesManager(Base):
         params.update({
             'method': 'SitesManager.addSite',
             'siteName': site_name,
-            # 'urls': urls,
             'ecommerce': ecommerce,
             'siteSearch': site_search,
             'searchKeywordParameters': search_keyword_parameters,
