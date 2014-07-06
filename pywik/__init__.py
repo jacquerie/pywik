@@ -31,7 +31,10 @@ class Pywik(object):
 
 def _check_error(response):
     if response.ok:
-        return response.json()
+        msg = response.json()
+        if msg.get('result') == 'error':
+            raise PywikError(msg)
+        return msg
     else:
         raise PywikError(response.text)
 
