@@ -46,5 +46,9 @@ class TestUsersManager(object):
 
 
 class TestSitesManager(object):
-    def test_empty(self, site):
-        pass
+    @pytest.fixture(autouse=True)
+    def setup(self, client):
+        self.sites_manager = client.sites_manager
+
+    def test_get_javascript_tag(self, site):
+        print self.sites_manager.get_javascript_tag(site)

@@ -133,3 +133,22 @@ class SitesManager(Base):
             'method': 'SitesManager.deleteSite',
             'idSite': site_id
         }))
+
+    def get_javascript_tag(self, id_site, piwik_url='', merge_subdomains='', group_page_titles_by_domain='',
+                           merge_alias_urls='', visitor_custom_variables='', page_custom_variables='',
+                           custom_campaign_name_query_param='', custom_campaign_keyword_param='',
+                           do_not_track=''):
+        return _check_error(self.session.get(self.url, params={
+            'method': 'SitesManager.getJavascriptTag',
+            'idSite': id_site,
+            'piwikUrl': piwik_url,
+            'mergeSubdomains': merge_subdomains,
+            'groupPageTitlesByDomain': group_page_titles_by_domain,
+            'mergeAliasUrls': merge_alias_urls,
+            'visitorCustomVariables': visitor_custom_variables,
+            'pageCustomVariables': page_custom_variables,
+            'customCampaignNameQueryParam': custom_campaign_name_query_param,
+            'customCampaignKeywordParam': custom_campaign_keyword_param,
+            'doNotTrack': do_not_track
+        }))['value']
+
