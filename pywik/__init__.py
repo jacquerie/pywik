@@ -88,6 +88,13 @@ class UsersManager(Base):
             'idSites': ','.join((str(x) for x in site_ids))
         }))
 
+    def get_token_auth(self, user_login, md5_password):
+        return _check_error(self.session.get(self.url, params={
+            'method': 'UsersManager.getTokenAuth',
+            'userLogin': user_login,
+            'md5Password': md5_password
+        }))['value']
+
 
 class SitesManager(Base):
     def add_site(self, site_name, urls, ecommerce='', site_search='', search_keyword_parameters='',

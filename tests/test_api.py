@@ -1,3 +1,4 @@
+import hashlib
 import os
 import logging
 import uuid
@@ -37,7 +38,11 @@ def site(client):
 class TestUsersManager(object):
     def test_set_access(self, client, user, site):
         # Need an empty test to force setup/teardown to run once.
-        print client.users_manager.set_user_access(user, 'view', [site])
+        print self.users_manager.set_user_access(user, 'view', [site])
+
+    def test_get_token_auth(self, user):
+        hashed_password = hashlib.md5('password').hexdigest()
+        print self.users_manager.get_token_auth(user, hashed_password)
 
 
 class TestSitesManager(object):
