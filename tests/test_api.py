@@ -36,7 +36,11 @@ def site(client):
 
 
 class TestUsersManager(object):
-    def test_set_access(self, client, user, site):
+    @pytest.fixture(autouse=True)
+    def setup(self, client):
+        self.users_manager = client.users_manager
+
+    def test_set_access(self, user, site):
         # Need an empty test to force setup/teardown to run once.
         print self.users_manager.set_user_access(user, 'view', [site])
 
